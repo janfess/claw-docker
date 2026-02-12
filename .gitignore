@@ -1,0 +1,12 @@
+.env
+.env.*
+
+workspace/*
+!workspace/.gitkeep
+
+*.log
+logs/
+openclaw.db
+sessions/
+
+.DS_Store

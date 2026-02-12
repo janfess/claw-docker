@@ -1,0 +1,39 @@
+services:
+  gateway:
+    build: .
+    container_name: openclaw_safe
+    restart: unless-stopped
+
+    # SECURITY: Standard Bridge Network (No host access)
+    network_mode: bridge
+
+    # PERFORMANCE: Give Chrome enough memory to not crash
+    shm_size: "2gb"
+
+    # SECURITY: Allow Chrome syscalls without giving full root privileges
+    security_opt:
+      - seccomp=unconfined
+
+    volumes:
+      # Map the CONFIG folder (so settings persist)
+      - ./config:/home/node/.openclaw
+
+      # Map the WORKSPACE (where the agent writes files)
+      - ./config/openclaw.json:/home/node/.openclaw/openclaw.json:ro
+      - ./workspace:/home/node/.openclaw/workspace
+
+    env_file:
+      - .env
+
+    environment:
+      # Pass keys securely
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_USER_ID=${TELEGRAM_USER_ID}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+
+      # Tell Chrome to run safely in Docker
+      - PUPPETEER_ARGS=--no-sandbox --disable-dev-shm-usage
+      - BROWSER_ARGS=--no-sandbox
+
+    # Run as non-root user 'node' (UID 1000)
+    user: "1000:1000"

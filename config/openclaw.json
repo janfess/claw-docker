@@ -1,0 +1,38 @@
+{
+  "logging": {
+    "level": "debug",
+    "consoleStyle": "pretty"
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": { "mode": "token", "token": "secret123" }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/home/node/.openclaw/workspace",
+      "model": { "primary": "google/gemini-3-pro" },
+      "sandbox": { "mode": "off", "workspaceAccess": "rw" }
+    }
+  },
+  "tools": {
+    "allow": ["browser", "exec", "read", "write", "edit"]
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "dmPolicy": "allowlist",
+      "allowFrom": ["${TELEGRAM_USER_ID}"]
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": { "enabled": true }
+    }
+  },
+  "env": {
+    "vars": {
+      "GEMINI_API_KEY": "{GEMINI_API_KEY}"
+    }
+  }
+}

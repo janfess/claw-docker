@@ -8,5 +8,9 @@ workspace/*
 logs/
 openclaw.db
 sessions/
+config/openclaw.json.bak
+config/openclaw.json.bak1
+config/openclaw.json.bak2
+config/openclaw.json.bak3
 
 .DS_Store

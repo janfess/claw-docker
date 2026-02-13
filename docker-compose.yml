@@ -30,10 +30,8 @@ services:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_USER_ID=${TELEGRAM_USER_ID}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+      - PUPPETEER_ARGS=--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu --disable-software-rasterizer --disable-dbus --mute-audio
+      - BROWSER_ARGS=--no-sandbox --disable-dev-shm-usage
 
-      # Tell Chrome to run safely in Docker
-      - PUPPETEER_ARGS=--no-sandbox --disable-dev-shm-usage
-      - BROWSER_ARGS=--no-sandbox
-
-    # Run as non-root user 'node' (UID 1000)
     user: "1000:1000"

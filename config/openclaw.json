@@ -3,6 +3,13 @@
     "level": "debug",
     "consoleStyle": "pretty"
   },
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "openclaw",
+    "executablePath": "/usr/bin/chromium",
+    "headless": true,
+    "noSandbox": true
+  },
   "gateway": {
     "mode": "local",
     "auth": { "mode": "token", "token": "secret123" }

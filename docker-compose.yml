@@ -4,6 +4,10 @@ services:
     container_name: openclaw_safe
     restart: unless-stopped
 
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+
     # SECURITY: Standard Bridge Network (No host access)
     network_mode: bridge
 
@@ -31,7 +35,8 @@ services:
       - TELEGRAM_USER_ID=${TELEGRAM_USER_ID}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
       - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-      - PUPPETEER_ARGS=--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu --disable-software-rasterizer --disable-dbus --mute-audio
-      - BROWSER_ARGS=--no-sandbox --disable-dev-shm-usage
+      - PUPPETEER_ARGS=--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu --disable-software-rasterizer --disable-dbus --mute-audio --no-first-run --disable-background-networking --disable-features=VizDisplayCompositor,Translate,BackForwardCache --disable-extensions
+      - BROWSER_ARGS=--no-sandbox
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
 
     user: "1000:1000"
